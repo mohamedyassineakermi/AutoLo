@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,4 +23,7 @@ public class Client implements Serializable {
     private String telephone;
     private String numPermis;
     private LocalDate dateInscription;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
+    private List<Reservation> reservations;
 }

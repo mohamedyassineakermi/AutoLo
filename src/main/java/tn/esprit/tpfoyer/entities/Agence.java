@@ -3,6 +3,7 @@ package tn.esprit.tpfoyer.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,4 +20,12 @@ public class Agence implements Serializable {
     private String ville;
     private String adresse;
     private String telephone;
+
+    @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
+    private List<Employe> employes;
+
+    @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
+    private List<Vehicule> vehicules;
+
+
 }

@@ -20,4 +20,7 @@ public class Employe implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private RoleEmploye role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Agence agence;
 }

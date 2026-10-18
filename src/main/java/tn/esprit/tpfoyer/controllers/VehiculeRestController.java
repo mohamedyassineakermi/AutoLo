@@ -1,0 +1,52 @@
+package tn.esprit.tpfoyer.controllers;
+
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import tn.esprit.tpfoyer.entities.Vehicule;
+import tn.esprit.tpfoyer.services.IVehiculeService;
+
+import java.util.List;
+
+@RestController
+@AllArgsConstructor
+@RequestMapping("/vehicule")
+@CrossOrigin("*")
+public class VehiculeRestController {
+
+    IVehiculeService vehiculeService;
+
+    // 1. GET ALL
+    // http://localhost:8080/vehicule/retrieve-all-vehicules
+    @GetMapping("/retrieve-all-vehicules")
+    public List<Vehicule> getVehicules() {
+        return vehiculeService.retrieveAllVehicules();
+    }
+
+    // 2. GET BY ID
+    // http://localhost:8080/vehicule/retrieve-vehicule/1
+    @GetMapping("/retrieve-vehicule/{vehicule-id}")
+    public Vehicule retrieveVehicule(@PathVariable("vehicule-id") Long vehiculeId) {
+        return vehiculeService.retrieveVehicule(vehiculeId);
+    }
+
+    // 3. POST
+    // http://localhost:8080/vehicule/add-vehicule
+    @PostMapping("/add-vehicule")
+    public Vehicule addVehicule(@RequestBody Vehicule v) {
+        return vehiculeService.addVehicule(v);
+    }
+
+    // 4. PUT
+    // http://localhost:8080/vehicule/modify-vehicule
+    @PutMapping("/modify-vehicule")
+    public Vehicule modifyVehicule(@RequestBody Vehicule v) {
+        return vehiculeService.modifyVehicule(v);
+    }
+
+    // 5. DELETE
+    // http://localhost:8080/vehicule/remove-vehicule/1
+    @DeleteMapping("/remove-vehicule/{vehicule-id}")
+    public void removeVehicule(@PathVariable("vehicule-id") Long vehiculeId) {
+        vehiculeService.removeVehicule(vehiculeId);
+    }
+}

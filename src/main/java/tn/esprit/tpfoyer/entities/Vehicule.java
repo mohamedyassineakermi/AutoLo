@@ -3,7 +3,7 @@ package tn.esprit.tpfoyer.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
-
+import java.util.List;
 @Entity
 @Getter
 @Setter
@@ -25,4 +25,16 @@ public class Vehicule implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private StatutVehicule statut;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Agence agence;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Equipement> equipements;
+
+    @OneToMany(mappedBy = "vehicule")
+    private List<Maintenance> maintenances;
+
+    @OneToMany(mappedBy = "vehicule")
+    private List<Reservation> reservations;
 }

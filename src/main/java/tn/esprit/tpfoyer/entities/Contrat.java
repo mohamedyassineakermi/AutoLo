@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,4 +20,10 @@ public class Contrat implements Serializable {
     private LocalDate dateSignature;
     private Double montantTotal;
     private boolean valide;
+
+    @OneToOne
+    private Reservation reservation;
+
+    @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL)
+    private List<Paiement> paiements;
 }
